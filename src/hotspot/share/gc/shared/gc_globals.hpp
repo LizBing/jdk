@@ -45,6 +45,9 @@
 #if INCLUDE_ZGC
 #include "gc/z/shared/z_shared_globals.hpp"
 #endif
+#if INCLUDE_GCTK
+#include "gc/shared/gctk/gctk_globals.hpp"
+#endif
 
 #define GC_FLAGS(develop,                                                   \
                  develop_pd,                                                \
@@ -108,6 +111,15 @@
     range,                                                                  \
     constraint))                                                            \
                                                                             \
+  GCTK_ONLY(GCTK_FLAGS(                                                     \
+    develop,                                                                \
+    develop_pd,                                                             \
+    product,                                                                \
+    product_pd,                                                             \
+    notproduct,                                                             \
+    range,                                                                  \
+    constraint))                                                            \
+                                                                            \
   /* gc */                                                                  \
                                                                             \
   product(bool, UseSerialGC, false,                                         \
@@ -130,6 +142,9 @@
                                                                             \
   product(bool, UseShenandoahGC, false,                                     \
           "Use the Shenandoah garbage collector")                           \
+                                                                            \
+  product(bool, EnableThirdPartyGCs, false,                                 \
+         "Enable the GCs implemented by GCTK.")                             \
                                                                             \
   product(uint, ParallelGCThreads, 0,                                       \
           "Number of parallel threads parallel gc will use")                \

@@ -43,5 +43,8 @@
 #include "gc/x/xBarrierSet.inline.hpp"
 #include "gc/z/zBarrierSet.inline.hpp"
 #endif
+#if INCLUDE_GCTK
+#include "gc/shared/gctk/thirdPartyBarrierSet.hpp"
+#endif
 
 #endif // SHARE_GC_SHARED_BARRIERSETCONFIG_INLINE_HPP

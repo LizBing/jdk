@@ -251,6 +251,24 @@
 #define NOT_ZGC_RETURN_(code) { return code; }
 #endif // INCLUDE_ZGC
 
+#ifndef INCLUDE_GCTK
+#define INCLUDE_GCTK 1
+#endif
+
+#if INCLUDE_GCTK
+#define GCTK_ONLY(x) x
+#define GCTK_ONLY_ARG(arg) arg,
+#define NOT_GCTK(x)
+#define NOT_GCTK_RETURN        /* next token must be ; */
+#define NOT_GCTK_RETURN_(code) /* next token must be ; */
+#else
+#define GCTK_ONLY(x)
+#define GCTK_ONLY_ARG(arg)
+#define NOT_GCTK(x) x
+#define NOT_GCTK_RETURN        {}
+#define NOT_GCTK_RETURN_(code) { return code; }
+#endif
+
 #ifndef INCLUDE_JFR
 #define INCLUDE_JFR 1
 #endif

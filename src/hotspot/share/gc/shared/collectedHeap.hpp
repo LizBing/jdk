@@ -90,6 +90,7 @@ public:
 //   ParallelScavengeHeap
 //   ShenandoahHeap
 //   ZCollectedHeap
+//   ThirdPartyHeap
 //
 class CollectedHeap : public CHeapObj<mtGC> {
   friend class VMStructs;
@@ -191,7 +192,8 @@ class CollectedHeap : public CHeapObj<mtGC> {
     G1,
     Epsilon,
     Z,
-    Shenandoah
+    Shenandoah,
+    ThirdParty
   };
 
  protected:
