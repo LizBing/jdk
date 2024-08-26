@@ -21,22 +21,12 @@
  *
  */
 
-#ifndef SHARE_GC_SHARED_GCTK_GCPLAN_HPP
-#define SHARE_GC_SHARED_GCTK_GCPLAN_HPP
+#ifndef SHARE_GC_SHARED_GCTK_THIRDPARTYGCINITLOGGER_HPP
+#define SHARE_GC_SHARED_GCTK_THIRDPARTYGCINITLOGGER_HPP
 
-#include "memory/allocation.hpp"
-#include "utilities/growableArray.hpp"
+#include "gc/shared/gcInitLogger.hpp"
 
-class GCMemoryManager;
-class MemoryPool;
-
-class GCPlan: public CHeapObj<mtGC> {
-public:
-  virtual bool moves_objects() = 0;
-
-  virtual size_t heap_alignment();
-  virtual size_t space_alignment();
-};
+class ThirdPartyGCInitLogger : public GCInitLogger {};
 
 
-#endif // SHARE_GC_SHARED_GCTK_GCPLAN_HPP
+#endif // SHARE_GC_SHARED_GCTK_THIRDPARTYGCINITLOGGER_HPP

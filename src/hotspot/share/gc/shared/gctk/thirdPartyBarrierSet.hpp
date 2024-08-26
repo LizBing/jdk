@@ -25,10 +25,12 @@
 #define SHARE_GC_SHARED_GCTK_THIRDPARTYBARRIERSET_HPP
 
 #include "gc/shared/barrierSet.hpp"
+#include "gc/shared/cardTableBarrierSet.inline.hpp"
 
+// The default third party barrier set does nothing.
+// To define ones that qualify for your own plans,
+// please follow the guide written in 'barrierSet.hpp'.
 class ThirdPartyBarrierSet: public BarrierSet {
-  friend class VMStructs;
-
 public:
   ThirdPartyBarrierSet();
 
@@ -37,8 +39,10 @@ public:
   virtual void on_thread_create(Thread* thread);
   virtual void on_thread_destroy(Thread* thread);
 
-  template <DecoratorSet decorators, typename BarrierSetT = ThirdPartyBarrierSet>
-  class AccessBarrier: public BarrierSet::AccessBarrier<decorators, BarrierSetT> {};
+  template <DecoratorSet decorators, typename BarrierSetT =
+                                       ThirdPartyBarrierSet>
+  class AccessBarrier: public BarrierSet::AccessBarrier<decorators,
+                                                        BarrierSetT> {};
 };
 
 template<>
@@ -51,6 +55,29 @@ struct BarrierSet::GetType<BarrierSet::ThirdPartyBarrierSet> {
   typedef ::ThirdPartyBarrierSet type;
 };
 
+class ThirdPartyCardTableBarrierSet: public CardTableBarrierSet {
+public:
+  ThirdPartyCardTableBarrierSet();
+
+  void on_thread_create(Thread* thread) override;
+  void on_thread_destroy(Thread* thread) override;
+
+  template <DecoratorSet decorators, typename BarrierSetT =
+                                       ThirdPartyCardTableBarrierSet>
+  class AccessBarrier: public BarrierSet::AccessBarrier<decorators,
+                                                        BarrierSetT> {};
+};
+
+template<>
+struct BarrierSet::GetName<ThirdPartyCardTableBarrierSet> {
+  static const BarrierSet::Name value =
+    BarrierSet::ThirdPartyCardTableBarrierSet;
+};
+
+template<>
+struct BarrierSet::GetType<BarrierSet::ThirdPartyCardTableBarrierSet> {
+  typedef ::ThirdPartyBarrierSet type;
+};
 
 #endif // SHARE_GC_SHARED_GCTK_THIRDPARTYBARRIERSET_HPP
 

@@ -35,7 +35,8 @@
   SHENANDOAHGC_ONLY(f(ShenandoahBarrierSet))         \
   ZGC_ONLY(f(XBarrierSet))                           \
   ZGC_ONLY(f(ZBarrierSet))                           \
-  GCTK_ONLY(f(ThirdPartyBarrierSet))
+  GCTK_ONLY(f(ThirdPartyBarrierSet))                 \
+  GCTK_ONLY(f(ThirdPartyCardTableBarrierSet))
 
 #define FOR_EACH_ABSTRACT_BARRIER_SET_DO(f)          \
   f(ModRef)
